@@ -7,4 +7,4 @@ python3 test.py \
     --no_instance \
     --label_nc 256 \
     --input_nc 4 \
-    --data_type 16
+    --data_type 8
