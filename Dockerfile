@@ -22,12 +22,19 @@ RUN apt-get update && \
 		tensorboardX \
 		tensorboard
 ########## Cache Busting ##########
-ARG CACHEBUST=1
+ARG cachebust=1
 ########## pix2pixhd ##########
 RUN cd ~ && \
 	git clone https://github.com/NVIDIA/pix2pixHD.git && \
 	pip3 install \
 		dominate \
 		scipy
+########## User ##########
+RUN apt-get update && \
+	apt-get install -y gosu
+COPY ./entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 ########## Initial Position ##########
 WORKDIR /root/pix2pixHD
+CMD ["bash"]
