@@ -24,7 +24,8 @@ RUN apt-get update && \
 ########## Cache Busting ##########
 ARG cachebust=1
 ########## pix2pixhd ##########
-RUN cd ~ && \
+RUN mkdir -p /home/user && \
+	cd /home/user && \
 	git clone https://github.com/NVIDIA/pix2pixHD.git && \
 	pip3 install \
 		dominate \
@@ -36,5 +37,5 @@ COPY ./entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 ########## Initial Position ##########
-WORKDIR /root/pix2pixHD
+WORKDIR /home/user/pix2pixHD
 CMD ["bash"]
